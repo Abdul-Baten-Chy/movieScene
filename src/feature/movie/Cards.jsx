@@ -1,4 +1,4 @@
-import Card from "@/Card";
+import Card from "@/feature/movie/Card";
 
 function Cards() {
   return (
