@@ -1,29 +1,45 @@
-import movieImage from "@/assets/movie-1.png";
-import starIcon from "@/assets/star.svg";
-import tagIcon from "@/assets/tag.svg";
-function Card() {
+import { useState } from "react";
+import { getImageurl } from "../../utils/getImageUrl";
+import AddToCartBtn from "./AddToCartBtn";
+import Modal from "./Modal";
+import Rating from "./Rating";
+
+function Card({ movie }) {
+  const [showModal, setShowModal] = useState(false);
+  const [selectedMovie, setSelectedMovie] = useState(null);
+
+  const handleDetail = (e) => {
+    e.stopPropagation();
+    setSelectedMovie(movie);
+    setShowModal(true);
+  };
+  const handleClose = () => {
+    setShowModal(false);
+    setSelectedMovie(null);
+  };
+
   return (
-    <figure class="p-4 border border-black/10 shadow-sm dark:border-white/10 rounded-xl">
-      <img class="w-full object-cover" src={movieImage} alt="" />
-      <figcaption class="pt-4">
-        <h3 class="text-xl mb-1">Iron Man</h3>
-        <p class="text-[#575A6E] text-sm mb-2">Action/Adventure/Sci-fi</p>
-        <div class="flex items-center space-x-1 mb-5">
-          <img src={starIcon} width="14" height="14" alt="" />
-          <img src={starIcon} width="14" height="14" alt="" />
-          <img src={starIcon} width="14" height="14" alt="" />
-          <img src={starIcon} width="14" height="14" alt="" />
-          <img src={starIcon} width="14" height="14" alt="" />
-        </div>
-        <a
-          class="bg-primary rounded-lg py-2 px-5 flex items-center justify-center gap-2 text-[#171923] font-semibold text-sm"
-          href="#"
-        >
-          <img src={tagIcon} alt="" />
-          <span>$100 | Add to Cart</span>
-        </a>
-      </figcaption>
-    </figure>
+    <>
+      {showModal && <Modal movie={selectedMovie} onClose={handleClose} />}
+      <figure
+        className="p-4 border border-black/10 shadow-sm dark:border-white/10 rounded-xl flex flex-col jus h-full"
+        onClick={(e) => handleDetail(e)}
+      >
+        <img
+          className="w-full object-cover"
+          src={getImageurl(movie.cover)}
+          alt=""
+        />
+        <figcaption className="pt-4 ">
+          <h3 className="text-xl mb-1">{movie.title}</h3>
+          <p className="text-[#575A6E] text-sm mb-2">{movie.genre}</p>
+          <div className="flex items-center space-x-1 mb-5">
+            <Rating value={movie.rating} />
+          </div>
+          <AddToCartBtn movie={movie} />
+        </figcaption>
+      </figure>
+    </>
   );
 }
 
