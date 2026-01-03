@@ -1,8 +1,8 @@
 import Cards from "@/feature/movie/Cards";
 
+import { useThemeContext } from "@/hooks/useThemeContex";
 import Header from "@/shared/Header";
 import SideBar from "@/shared/SideBar";
-import { useThemeContext } from "../hooks/useThemeContex";
 function Page() {
   const { theme } = useThemeContext();
   return (

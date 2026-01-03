@@ -3,9 +3,9 @@ import logo from "@/assets/logo.svg";
 import ring from "@/assets/ring.svg";
 import shoppingCart from "@/assets/shopping-cart.svg";
 import { useCartContext } from "@/hooks/useCartContext";
+import { useThemeContext } from "@/hooks/useThemeContex";
 import { useMemo, useState } from "react";
 import Cart from "../feature/cart/Cart";
-import { useThemeContext } from "../hooks/useThemeContex";
 
 function Header() {
   const { state } = useCartContext();
