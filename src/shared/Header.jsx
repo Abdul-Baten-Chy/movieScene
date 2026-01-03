@@ -2,12 +2,14 @@ import sun from "@/assets/icons/sun.svg";
 import logo from "@/assets/logo.svg";
 import ring from "@/assets/ring.svg";
 import shoppingCart from "@/assets/shopping-cart.svg";
+import { useCartContext } from "@/hooks/useCartContext";
 import { useMemo, useState } from "react";
 import Cart from "../feature/cart/Cart";
-import { useCartContext } from "../hooks/useCartContext";
+import { useThemeContext } from "../hooks/useThemeContex";
 
 function Header() {
-  const { state, dispatch } = useCartContext();
+  const { state } = useCartContext();
+  const { theme, setTheme } = useThemeContext();
   const [showCart, setShowCart] = useState(false);
   const cartData = state.cart;
   const cardCount = useMemo(() => cartData.length, [cartData]);
@@ -33,6 +35,7 @@ function Header() {
             <a
               className="bg-primary/20 dark:bg-primary/[7%] rounded-lg backdrop-blur-[2px] p-1 inline-block"
               href="#"
+              onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
             >
               <img src={sun} width="24" height="24" alt="" />
             </a>

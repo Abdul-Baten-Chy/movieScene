@@ -5,7 +5,7 @@ import { CartContext, ThemeContext } from "./context";
 import { cartReducer, initialState } from "./reducer/reducer";
 
 function App() {
-  const [theme, setTheme] = useState("dark");
+  const [theme, setTheme] = useState("");
   const [state, dispatch] = useReducer(cartReducer, initialState);
 
   return (
