@@ -6,8 +6,8 @@ import { useMemo } from "react";
 import { useCartContext } from "../hooks/useCartContext";
 
 function Header() {
-  const { cart } = useCartContext();
-  const cartData = cart.cart;
+  const { state } = useCartContext();
+  const cartData = state.cart;
   const cardCount = useMemo(() => cartData.length, [cartData]);
 
   return (

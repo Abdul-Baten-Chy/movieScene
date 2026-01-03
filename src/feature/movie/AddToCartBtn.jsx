@@ -1,10 +1,21 @@
 import tagIcon from "@/assets/tag.svg";
 import { useCartContext } from "@/hooks/useCartContext";
+import { toast } from "react-toastify";
 function AddToCartBtn({ movie }) {
-  const { dispatch } = useCartContext();
+  const { state, dispatch } = useCartContext();
   const handleAddToCart = (e) => {
     e.stopPropagation();
-    dispatch({ type: "ADD_TO_CART", payload: movie });
+    const alredatAdded = state.cart.find((item) => item.id === movie.id);
+    console.log(alredatAdded);
+
+    if (!alredatAdded) {
+      dispatch({ type: "ADD_TO_CART", payload: movie });
+      toast.success(`${movie.title} added to cart!`, { position: "top-right" });
+    } else {
+      toast.error(`${movie.title} is already in the cart.`, {
+        position: "top-right",
+      });
+    }
   };
   return (
     <button
